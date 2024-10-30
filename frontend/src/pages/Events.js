@@ -6,9 +6,9 @@ function EventsPage() {
   //const events = useLoaderData();
   const data = useLoaderData();
 
-// if (data.isError) {
-//   return <p>{data.message}</p>
-// }
+  // if (data.isError) {
+  //   return <p>{data.message}</p>
+  // }
 
   const events = data.events;
 
@@ -22,18 +22,20 @@ export async function loader() {
 
   if (!response.ok) {
     // return {isError: true, message: 'Could not fetch events.'};
-    throw { message: 'Could not fetch events.'};
+    //throw { message: 'Could not fetch events.'};
+    throw new Response(JSON.stringify({ message: "Could not fetch events." }), {
+      status: 500,
+    });
   } else {
-   // const resData = await response.json();
-   // return resData.events;
+    // const resData = await response.json();
+    // return resData.events;
 
-//const res = new Response('any data', {status: 201}); 
-//return res;
+    //const res = new Response('any data', {status: 201});
+    //return res;
 
-return response;
+    return response;
   }
 }
-
 
 /**
  * you don't need to manually extract the data from the response:
@@ -43,17 +45,6 @@ instead  you can directly:
  return response;
  this special kind of return object is supported by REact Router and its loader functions.
  *  */
-
-
-
-
-
-
-
-
-
-
-
 
 //* fetching data from backend
 // import { useEffect, useState } from 'react';
