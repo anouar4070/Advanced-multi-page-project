@@ -3,7 +3,14 @@ import { useLoaderData } from "react-router-dom";
 import EventsList from "../components/EventsList";
 
 function EventsPage() {
-  const events = useLoaderData();
+  //const events = useLoaderData();
+  const data = useLoaderData();
+
+// if (data.isError) {
+//   return <p>{data.message}</p>
+// }
+
+  const events = data.events;
 
   return <EventsList events={events} />;
 }
@@ -14,15 +21,28 @@ export async function loader() {
   const response = await fetch("http://localhost:8080/events");
 
   if (!response.ok) {
-    //...
+    // return {isError: true, message: 'Could not fetch events.'};
+    throw { message: 'Could not fetch events.'};
   } else {
-    const resData = await response.json();
-    return resData.events;
+   // const resData = await response.json();
+   // return resData.events;
+
+//const res = new Response('any data', {status: 201}); 
+//return res;
+
+return response;
   }
 }
 
 
-
+/**
+ * you don't need to manually extract the data from the response:
+const resData = await response.json();
+return resData.events;
+instead  you can directly:
+ return response;
+ this special kind of return object is supported by REact Router and its loader functions.
+ *  */
 
 
 
