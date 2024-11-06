@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { json, useLoaderData } from "react-router-dom";
 
 import EventsList from "../components/EventsList";
 
@@ -23,9 +23,11 @@ export async function loader() {
   if (!response.ok) {
     // return {isError: true, message: 'Could not fetch events.'};
     //throw { message: 'Could not fetch events.'};
-    throw new Response(JSON.stringify({ message: "Could not fetch events." }), {
-      status: 500,
-    });
+
+    // throw new Response(JSON.stringify({ message: "Could not fetch events." }), {
+    //   status: 500,
+    // });
+    return json({ message: "Could not fetch events." }, { status: 500 });
   } else {
     // const resData = await response.json();
     // return resData.events;
@@ -43,7 +45,7 @@ const resData = await response.json();
 return resData.events;
 instead  you can directly:
  return response;
- this special kind of return object is supported by REact Router and its loader functions.
+ this special kind of return object is supported by React Router and its loader functions.
  *  */
 
 //* fetching data from backend
