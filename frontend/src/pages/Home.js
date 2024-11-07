@@ -1,11 +1,11 @@
+import PageContent from '../components/PageContent';
 
-
- function HomePage() {
+function HomePage() {
   return (
-    <div>
-      HomePage
-    </div>
-  )
+    <PageContent title="Welcome!">
+      <p>Browse all our amazing events!</p>
+    </PageContent>
+  );
 }
 
 export default HomePage;
